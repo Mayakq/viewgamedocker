@@ -1,0 +1,31 @@
+version: '3.9'
+services:
+  pgadmin:
+    image: dpage/pgadmin4:7.7
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@pgadmin.com
+      PGADMIN_DEFAULT_PASSWORD: 123
+      PGADMIN_LISTEN_PORT: 80
+    ports:
+      - "15432:80"
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:16
+    container_name: viewgame
+    ports:
+      - '6500:6500'
+    volumes:
+      - progresDB:/var/lib/postgresql/data
+    env_file:
+      - ./.env
+  viewgame:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./.env
+volumes:
+  progresDB:
+
