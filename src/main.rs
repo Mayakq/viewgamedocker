@@ -16,7 +16,6 @@ async fn main() -> std::io::Result<()> {
         .await
 }
 
-
 #[get("/check")]
 pub async fn check(req: HttpRequest) -> HttpResponse {
     HttpResponse::Ok().status(StatusCode::CREATED).finish()
